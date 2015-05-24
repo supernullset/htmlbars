@@ -92,6 +92,13 @@ test("Simple elements can have attributes", function() {
   equalTokens(fragment, '<div class="foo" id="bar">content</div>');
 });
 
+test("Simple elements take the first attribute definition in the case of multiple identical attributes", function() {
+  var template = compile("<div class='foo' class='bar'>content</div>");
+  var fragment = template.render({}, env).fragment;
+
+  equalTokens(fragment, '<div class="foo">content</div>');
+});
+
 test("Simple elements can have an empty attribute", function() {
   var template = compile("<div class=''>content</div>");
   var fragment = template.render({}, env).fragment;
